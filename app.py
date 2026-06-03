@@ -49,7 +49,7 @@ def predict_cv(text):
 
     scores = model.decision_function(vectorized_text)
 
-    confidence = round(scores.max() * 10, 2)
+    confidence = round(abs(scores.max()) * 10, 2)
 
     return prediction, confidence
 
@@ -95,7 +95,7 @@ if uploaded_file is not None:
 
     st.write("### Confidence Score")
 
-    progress_value = min(int(confidence), 100)
+    progress_value = max(0, min(int(confidence), 100))
 
     st.progress(progress_value)
 
